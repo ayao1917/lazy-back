@@ -24,7 +24,10 @@ class AccessLog extends Eloquent
 {
 	protected $table = 'access_log';
 	public $incrementing = false;
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'id' => 'int'

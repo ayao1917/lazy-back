@@ -27,7 +27,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class PurchaseOrderExtraFee extends Eloquent
 {
 	protected $table = 'purchase_order_extra_fee';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'order_id' => 'int',

@@ -26,7 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Admin extends Eloquent
 {
 	protected $table = 'admin';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $dates = [
 		'created',

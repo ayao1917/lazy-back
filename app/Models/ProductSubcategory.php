@@ -26,7 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ProductSubcategory extends Eloquent
 {
 	protected $table = 'product_subcategory';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'product_category_id' => 'int'

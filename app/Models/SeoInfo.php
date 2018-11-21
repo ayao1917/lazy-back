@@ -29,7 +29,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class SeoInfo extends Eloquent
 {
 	protected $table = 'seo_info';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'relate_id' => 'int',

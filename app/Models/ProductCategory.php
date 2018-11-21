@@ -24,7 +24,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ProductCategory extends Eloquent
 {
 	protected $table = 'product_category';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $dates = [
 		'created',

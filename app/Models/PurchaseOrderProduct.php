@@ -31,7 +31,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class PurchaseOrderProduct extends Eloquent
 {
 	protected $table = 'purchase_order_product';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'purchase_order_id' => 'int',

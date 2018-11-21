@@ -12,7 +12,10 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     protected $table = 'user';
-    public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
     protected $casts = [
         'gender' => 'bool'

@@ -26,7 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ItemQuantityGroup extends Eloquent
 {
 	protected $table = 'item_quantity_group';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'quantity' => 'int',

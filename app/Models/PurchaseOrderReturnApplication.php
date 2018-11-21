@@ -50,7 +50,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class PurchaseOrderReturnApplication extends Eloquent
 {
 	protected $table = 'purchase_order_return_application';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'purchase_order_id' => 'int',

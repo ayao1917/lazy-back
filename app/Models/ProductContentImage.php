@@ -25,7 +25,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ProductContentImage extends Eloquent
 {
 	protected $table = 'product_content_image';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'product_id' => 'int'

@@ -28,7 +28,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ProductProgram extends Eloquent
 {
 	protected $table = 'product_program';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'product_id' => 'int',

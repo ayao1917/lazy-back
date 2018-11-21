@@ -26,7 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Page extends Eloquent
 {
 	protected $table = 'page';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'type' => 'int'

@@ -29,7 +29,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class SystemLog extends Eloquent
 {
 	protected $table = 'system_log';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'admin_id' => 'int',

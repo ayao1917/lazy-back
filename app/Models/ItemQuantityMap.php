@@ -24,7 +24,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class ItemQuantityMap extends Eloquent
 {
 	protected $table = 'item_quantity_map';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'group_id' => 'int',

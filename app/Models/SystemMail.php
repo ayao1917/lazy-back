@@ -23,7 +23,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class SystemMail extends Eloquent
 {
 	protected $table = 'system_mail';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $dates = [
 		'created',

@@ -24,7 +24,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Home extends Eloquent
 {
 	protected $table = 'home';
-	public $timestamps = false;
+    public $timestamps = true;
+
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
 
 	protected $casts = [
 		'type' => 'int'
