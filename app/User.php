@@ -5,10 +5,24 @@ namespace lazyworker;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
+
+    protected $table = 'user';
+    public $timestamps = false;
+
+    protected $casts = [
+        'gender' => 'bool'
+    ];
+
+    protected $dates = [
+        'birthday',
+        'created',
+        'modified'
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +30,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username',
+        'password',
+        'name',
+        'phone',
+        'city',
+        'region',
+        'address',
+        'email',
+        'birthday',
+        'gender',
+        'created',
+        'modified'
     ];
 
     /**
@@ -27,4 +52,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function purchase_orders()
+    {
+        return $this->hasMany(\lazyworker\Models\PurchaseOrder::class);
+    }
+
+    public function purchase_order_return_applications()
+    {
+        return $this->hasMany(\lazyworker\Models\PurchaseOrderReturnApplication::class);
+    }
+
+    public function user_messages()
+    {
+        return $this->hasMany(\lazyworker\Models\UserMessage::class);
+    }
 }
