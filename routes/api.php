@@ -24,14 +24,22 @@ Route::prefix('v1')->group(function () {
     ], function () {
         Route::post('login', 'AuthController@login');
         Route::post('signup', 'AuthController@signup');
-
-        Route::group([
-            'middleware' => 'auth:api'
-        ], function() {
-            Route::get('logout', 'AuthController@logout');
-            Route::get('user', 'AuthController@user');
-        });
     });
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+
+        // User
+        Route::get('users', 'UserController@index');
+        Route::get('users/{user}', 'UserController@show');
+        Route::post('users', 'UserController@store');
+        Route::put('users/{user}', 'UserController@update');
+        Route::delete('users/{user}', 'UserController@delete');
+    });
+
     // Blog
     Route::get('blogs', 'BlogController@index');
     Route::get('blogs/{blog}', 'BlogController@show');
@@ -123,13 +131,6 @@ Route::prefix('v1')->group(function () {
     Route::post('systemMessages', 'SystemMessageController@store');
     Route::put('systemMessages/{systemMessage}', 'SystemMessageController@update');
     Route::delete('systemMessages/{systemMessage}', 'SystemMessageController@delete');
-
-    // User
-    Route::get('users', 'UserController@index');
-    Route::get('users/{user}', 'UserController@show');
-    Route::post('users', 'UserController@store');
-    Route::put('users/{user}', 'UserController@update');
-    Route::delete('users/{user}', 'UserController@delete');
 
     // UserMessage
     Route::get('userMessages', 'UserMessageController@index');
