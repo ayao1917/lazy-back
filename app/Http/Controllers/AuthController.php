@@ -17,6 +17,11 @@ class AuthController
      * @param  [string] email
      * @param  [string] password
      * @param  [string] password_confirmation
+     * @param  [string] phone
+     * @param  [string] city
+     * @param  [string] region
+     * @param  [string] address
+     * @param  [int] gender 0: male, 1: female
      * @return [string] message
      */
     public function signup(Request $request)
@@ -39,6 +44,7 @@ class AuthController
         ]);
         $user->save();
         return response()->json([
+            'success' => true,
             'message' => 'Successfully created user!'
         ], 201);
     }
@@ -63,6 +69,7 @@ class AuthController
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials))
             return response()->json([
+                'success' => false,
                 'message' => 'Unauthorized'
             ], 401);
         $user = $request->user();
@@ -72,6 +79,7 @@ class AuthController
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
         return response()->json([
+            'success' => true,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
@@ -89,6 +97,7 @@ class AuthController
     {
         $request->user()->token()->revoke();
         return response()->json([
+            'success' => true,
             'message' => 'Successfully logged out'
         ]);
     }

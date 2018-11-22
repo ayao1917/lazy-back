@@ -95,48 +95,48 @@ class Product extends Eloquent
 
 	public function product_subcategory()
 	{
-		return $this->belongsTo(\App\Models\ProductSubcategory::class);
+		return $this->belongsTo(\lazyworker\Models\ProductSubcategory::class);
 	}
 
 	public function discount()
 	{
-		return $this->belongsTo(\App\Models\Discount::class);
+		return $this->belongsTo(\lazyworker\Models\Discount::class);
 	}
 
 	public function product_addons()
 	{
-		return $this->hasMany(\App\Models\ProductAddon::class, 'addon_product_id');
+		return $this->hasMany(\lazyworker\Models\ProductAddon::class, 'addon_product_id');
 	}
 
 	public function product_attacheds()
 	{
-		return $this->hasMany(\App\Models\ProductAttached::class);
+		return $this->hasMany(\lazyworker\Models\ProductAttached::class);
 	}
 
 	public function product_content_images()
 	{
-		return $this->hasMany(\App\Models\ProductContentImage::class);
+		return $this->hasMany(\lazyworker\Models\ProductContentImage::class);
 	}
 
 	public function product_programs()
 	{
-		return $this->hasMany(\App\Models\ProductProgram::class);
+		return $this->hasMany(\lazyworker\Models\ProductProgram::class);
 	}
 
 	public function product_relates()
 	{
-		return $this->hasMany(\App\Models\ProductRelate::class, 'relate_product_id');
+		return $this->hasMany(\lazyworker\Models\ProductRelate::class, 'relate_product_id');
 	}
 
 	public function purchase_orders()
 	{
-		return $this->belongsToMany(\App\Models\PurchaseOrder::class, 'purchase_order_product')
+		return $this->belongsToMany(\lazyworker\Models\PurchaseOrder::class, 'purchase_order_product')
 					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
 	}
 
 	public function purchase_order_return_applications()
 	{
-		return $this->belongsToMany(\App\Models\PurchaseOrderReturnApplication::class, 'purchase_order_return_application_product')
+		return $this->belongsToMany(\lazyworker\Models\PurchaseOrderReturnApplication::class, 'purchase_order_return_application_product')
 					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
 	}
 }
