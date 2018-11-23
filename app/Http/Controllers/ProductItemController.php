@@ -5,11 +5,18 @@ namespace lazyworker\Http\Controllers;
 use Illuminate\Http\Request;
 use lazyworker\Models\ProductItem;
 
-class ProductItemController extends Controller
+class ProductItemController extends BaseController
 {
     public function index()
     {
-        return ProductItem::all();
+        if (!isset($_GET['productId'])) {
+            return $this->sendResponse(ProductItem::all());
+        }
+
+        $productId = $_GET['productId'];
+        $items = ProductItem::where('product_id', $productId)->get();
+
+        return $this->sendResponse($items);
     }
 
     public function show(ProductItem $productItem)

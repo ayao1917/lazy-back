@@ -4,7 +4,6 @@ namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
 use lazyworker\Models\Product;
-use lazyworker\Models\ProductCategory;
 
 class ProductController extends BaseController
 {
@@ -17,7 +16,7 @@ class ProductController extends BaseController
     public function index()
     {
         if (!isset($_GET['categoryId'])) {
-            return $this->sendResponse(Product::all(), null);
+            return $this->sendResponse(Product::all());
         }
 
         $categoryId = $_GET['categoryId'];
@@ -25,32 +24,32 @@ class ProductController extends BaseController
             $q->where('product_category_id', $categoryId);
         })->get();
 
-        return $this->sendResponse($products, null);
+        return $this->sendResponse($products);
     }
 
     public function show(Product $product)
     {
-        return $product;
+        return $this->sendResponse($product);
     }
 
     public function store(Request $request)
     {
         $product = Product::create($request->all());
 
-        return response()->json($product, 201);
+        return $this->sendResponse($product);
     }
 
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());
 
-        return response()->json($product, 200);
+        return $this->sendResponse($product);
     }
 
     public function delete(Product $product)
     {
         $product->delete();
 
-        return response()->json(null, 204);
+        return $this->sendResponse(null, null, 204);
     }
 }

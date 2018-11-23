@@ -149,21 +149,21 @@ class ProductItem extends Eloquent
 
 	public function item_quantity_groups()
 	{
-		return $this->hasMany(\App\Models\ItemQuantityGroup::class, 'parent_id');
+		return $this->hasMany(\lazyworker\Models\ItemQuantityGroup::class, 'parent_id');
 	}
 
 	public function item_quantity_maps()
 	{
-		return $this->hasMany(\App\Models\ItemQuantityMap::class, 'item_id');
+		return $this->hasMany(\lazyworker\Models\ItemQuantityMap::class, 'item_id');
 	}
 
 	public function purchase_order_product_items()
 	{
-		return $this->hasMany(\App\Models\PurchaseOrderProductItem::class);
+		return $this->hasMany(\lazyworker\Models\PurchaseOrderProductItem::class);
 	}
 
 	public function purchase_order_return_application_product_items()
 	{
-		return $this->hasMany(\App\Models\PurchaseOrderReturnApplicationProductItem::class);
+		return $this->hasMany(\lazyworker\Models\PurchaseOrderReturnApplicationProductItem::class);
 	}
 }
