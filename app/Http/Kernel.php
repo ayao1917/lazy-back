@@ -19,7 +19,6 @@ class Kernel extends HttpKernel
         \lazyworker\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \lazyworker\Http\Middleware\TrustProxies::class,
-        \lazyworker\Http\Middleware\CORS::class,
     ];
 
     /**
@@ -41,6 +40,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \Barryvdh\Cors\HandleCors::class,
         ],
     ];
 
