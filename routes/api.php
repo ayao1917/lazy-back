@@ -38,6 +38,9 @@ Route::prefix('v1')->group(function () {
         Route::post('users', 'UserController@store');
         Route::put('users/{user}', 'UserController@update');
         Route::delete('users/{user}', 'UserController@delete');
+
+        // File upload
+        Route::put('upload/{type}', 'UploadFileController@imageUpload');
     });
 
     // Blog
