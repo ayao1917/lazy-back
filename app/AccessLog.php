@@ -5,34 +5,32 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Page
+ * Class AccessLog
  * 
  * @property int $id
- * @property string $title
- * @property int $type
- * @property string $content
+ * @property string $ip
+ * @property string $path
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
- * 
- * @property \Illuminate\Database\Eloquent\Collection $page_content_images
  *
  * @package App\Models
  */
-class Page extends Eloquent
+class AccessLog extends Eloquent
 {
-	protected $table = 'page';
+	protected $table = 'access_log';
+	public $incrementing = false;
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'type' => 'int'
+		'id' => 'int'
 	];
 
 	protected $dates = [
@@ -41,15 +39,10 @@ class Page extends Eloquent
 	];
 
 	protected $fillable = [
-		'title',
-		'type',
-		'content',
+		'id',
+		'ip',
+		'path',
 		'created',
 		'modified'
 	];
-
-	public function page_content_images()
-	{
-		return $this->hasMany(\App\Models\PageContentImage::class);
-	}
 }

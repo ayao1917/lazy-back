@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\ProductItem $product_item
+ * @property \lazyworker\ProductItem $product_item
  * @property \Illuminate\Database\Eloquent\Collection $item_quantity_maps
  *
  * @package App\Models
@@ -50,11 +50,11 @@ class ItemQuantityGroup extends Eloquent
 
 	public function product_item()
 	{
-		return $this->belongsTo(\App\Models\ProductItem::class, 'parent_id');
+		return $this->belongsTo(\lazyworker\ProductItem::class, 'parent_id');
 	}
 
 	public function item_quantity_maps()
 	{
-		return $this->hasMany(\App\Models\ItemQuantityMap::class, 'group_id');
+		return $this->hasMany(\lazyworker\ItemQuantityMap::class, 'group_id');
 	}
 }

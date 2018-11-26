@@ -5,29 +5,34 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class ProductCategory
+ * Class ProductContentImage
  * 
  * @property int $id
- * @property string $name
+ * @property int $product_id
+ * @property string $photo
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \Illuminate\Database\Eloquent\Collection $product_subcategories
+ * @property \lazyworker\Product $product
  *
  * @package App\Models
  */
-class ProductCategory extends Eloquent
+class ProductContentImage extends Eloquent
 {
-	protected $table = 'product_category';
+	protected $table = 'product_content_image';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
+
+	protected $casts = [
+		'product_id' => 'int'
+	];
 
 	protected $dates = [
 		'created',
@@ -35,13 +40,14 @@ class ProductCategory extends Eloquent
 	];
 
 	protected $fillable = [
-		'name',
+		'product_id',
+		'photo',
 		'created',
 		'modified'
 	];
 
-	public function product_subcategories()
+	public function product()
 	{
-		return $this->hasMany(\App\Models\ProductSubcategory::class);
+		return $this->belongsTo(\lazyworker\Product::class);
 	}
 }

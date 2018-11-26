@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\ProductCategory;
+use lazyworker\ProductCategory;
 
 class ProductCategoryController extends Controller
 {

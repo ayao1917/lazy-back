@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 

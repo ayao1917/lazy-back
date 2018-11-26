@@ -5,33 +5,32 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BlogContentImage
+ * Class Configuration
  * 
  * @property int $id
- * @property int $blog_id
- * @property string $photo
+ * @property int $type
+ * @property string $name
+ * @property string $value
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
- * 
- * @property \App\Models\Blog $blog
  *
  * @package App\Models
  */
-class BlogContentImage extends Eloquent
+class Configuration extends Eloquent
 {
-	protected $table = 'blog_content_image';
+	protected $table = 'configuration';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'blog_id' => 'int'
+		'type' => 'int'
 	];
 
 	protected $dates = [
@@ -40,14 +39,10 @@ class BlogContentImage extends Eloquent
 	];
 
 	protected $fillable = [
-		'blog_id',
-		'photo',
+		'type',
+		'name',
+		'value',
 		'created',
 		'modified'
 	];
-
-	public function blog()
-	{
-		return $this->belongsTo(\App\Models\Blog::class);
-	}
 }

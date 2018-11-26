@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\PurchaseOrderReturnApplication;
+use lazyworker\PurchaseOrderReturnApplication;
 
 class PurchaseOrderReturnApplicationController extends Controller
 {

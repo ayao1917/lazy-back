@@ -58,16 +58,16 @@ class User extends Authenticatable
 
     public function purchase_orders()
     {
-        return $this->hasMany(\lazyworker\Models\PurchaseOrder::class);
+        return $this->hasMany(\lazyworker\PurchaseOrder::class);
     }
 
     public function purchase_order_return_applications()
     {
-        return $this->hasMany(\lazyworker\Models\PurchaseOrderReturnApplication::class);
+        return $this->hasMany(\lazyworker\PurchaseOrderReturnApplication::class);
     }
 
     public function user_messages()
     {
-        return $this->hasMany(\lazyworker\Models\UserMessage::class);
+        return $this->hasMany(\lazyworker\UserMessage::class);
     }
 }

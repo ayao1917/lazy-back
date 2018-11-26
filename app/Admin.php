@@ -5,24 +5,27 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class SystemMail
+ * Class Admin
  * 
  * @property int $id
- * @property string $name
- * @property string $value
+ * @property string $username
+ * @property string $password
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
+ * @property string $email
+ * 
+ * @property \Illuminate\Database\Eloquent\Collection $system_logs
  *
  * @package App\Models
  */
-class SystemMail extends Eloquent
+class Admin extends Eloquent
 {
-	protected $table = 'system_mail';
+	protected $table = 'admin';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
@@ -33,10 +36,20 @@ class SystemMail extends Eloquent
 		'modified'
 	];
 
-	protected $fillable = [
-		'name',
-		'value',
-		'created',
-		'modified'
+	protected $hidden = [
+		'password'
 	];
+
+	protected $fillable = [
+		'username',
+		'password',
+		'created',
+		'modified',
+		'email'
+	];
+
+	public function system_logs()
+	{
+		return $this->hasMany(\lazyworker\SystemLog::class);
+	}
 }

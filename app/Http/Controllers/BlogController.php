@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\Blog;
+use lazyworker\Blog;
 
 class BlogController extends Controller
 {

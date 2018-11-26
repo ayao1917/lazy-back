@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -20,8 +20,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\PurchaseOrderProduct $purchase_order_product
- * @property \App\Models\ProductItem $product_item
+ * @property \lazyworker\PurchaseOrderProduct $purchase_order_product
+ * @property \lazyworker\ProductItem $product_item
  *
  * @package App\Models
  */
@@ -55,11 +55,11 @@ class PurchaseOrderProductItem extends Eloquent
 
 	public function purchase_order_product()
 	{
-		return $this->belongsTo(\App\Models\PurchaseOrderProduct::class);
+		return $this->belongsTo(\lazyworker\PurchaseOrderProduct::class);
 	}
 
 	public function product_item()
 	{
-		return $this->belongsTo(\App\Models\ProductItem::class);
+		return $this->belongsTo(\lazyworker\ProductItem::class);
 	}
 }

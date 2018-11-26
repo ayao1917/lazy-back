@@ -5,51 +5,51 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class Admin
+ * Class Page
  * 
  * @property int $id
- * @property string $username
- * @property string $password
+ * @property string $title
+ * @property int $type
+ * @property string $content
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
- * @property string $email
  * 
- * @property \Illuminate\Database\Eloquent\Collection $system_logs
+ * @property \Illuminate\Database\Eloquent\Collection $page_content_images
  *
  * @package App\Models
  */
-class Admin extends Eloquent
+class Page extends Eloquent
 {
-	protected $table = 'admin';
+	protected $table = 'page';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
+
+	protected $casts = [
+		'type' => 'int'
+	];
 
 	protected $dates = [
 		'created',
 		'modified'
 	];
 
-	protected $hidden = [
-		'password'
-	];
-
 	protected $fillable = [
-		'username',
-		'password',
+		'title',
+		'type',
+		'content',
 		'created',
-		'modified',
-		'email'
+		'modified'
 	];
 
-	public function system_logs()
+	public function page_content_images()
 	{
-		return $this->hasMany(\App\Models\SystemLog::class);
+		return $this->hasMany(\lazyworker\PageContentImage::class);
 	}
 }

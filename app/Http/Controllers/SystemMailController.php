@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\SystemMail;
+use lazyworker\SystemMail;
 
 class SystemMailController extends Controller
 {

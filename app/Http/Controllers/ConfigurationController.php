@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\Configuration;
+use lazyworker\Configuration;
 
 class ConfigurationController extends Controller
 {

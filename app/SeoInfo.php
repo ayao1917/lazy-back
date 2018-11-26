@@ -5,32 +5,38 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class AccessLog
+ * Class SeoInfo
  * 
  * @property int $id
- * @property string $ip
+ * @property int $relate_id
+ * @property int $type
  * @property string $path
+ * @property string $title
+ * @property string $description
+ * @property string $keywords
+ * @property string $heading_tag
+ * @property string $sub_heading_tag
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  *
  * @package App\Models
  */
-class AccessLog extends Eloquent
+class SeoInfo extends Eloquent
 {
-	protected $table = 'access_log';
-	public $incrementing = false;
+	protected $table = 'seo_info';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'id' => 'int'
+		'relate_id' => 'int',
+		'type' => 'int'
 	];
 
 	protected $dates = [
@@ -39,9 +45,14 @@ class AccessLog extends Eloquent
 	];
 
 	protected $fillable = [
-		'id',
-		'ip',
+		'relate_id',
+		'type',
 		'path',
+		'title',
+		'description',
+		'keywords',
+		'heading_tag',
+		'sub_heading_tag',
 		'created',
 		'modified'
 	];

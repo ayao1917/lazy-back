@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\Discount;
+use lazyworker\Discount;
 
 class DiscountController extends Controller
 {

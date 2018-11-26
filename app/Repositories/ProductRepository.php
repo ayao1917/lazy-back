@@ -2,7 +2,7 @@
 
 namespace lazyworker\Repositories;
 
-use lazyworker\Models\Product;
+use lazyworker\Product;
 
 class ProductRepository
 {

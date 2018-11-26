@@ -5,34 +5,28 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class PageContentImage
+ * Class SystemMail
  * 
  * @property int $id
- * @property int $page_id
- * @property string $photo
+ * @property string $name
+ * @property string $value
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
- * 
- * @property \App\Models\Page $page
  *
  * @package App\Models
  */
-class PageContentImage extends Eloquent
+class SystemMail extends Eloquent
 {
-	protected $table = 'page_content_image';
+	protected $table = 'system_mail';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
-
-	protected $casts = [
-		'page_id' => 'int'
-	];
 
 	protected $dates = [
 		'created',
@@ -40,14 +34,9 @@ class PageContentImage extends Eloquent
 	];
 
 	protected $fillable = [
-		'page_id',
-		'photo',
+		'name',
+		'value',
 		'created',
 		'modified'
 	];
-
-	public function page()
-	{
-		return $this->belongsTo(\App\Models\Page::class);
-	}
 }

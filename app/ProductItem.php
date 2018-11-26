@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -149,21 +149,21 @@ class ProductItem extends Eloquent
 
 	public function item_quantity_groups()
 	{
-		return $this->hasMany(\lazyworker\Models\ItemQuantityGroup::class, 'parent_id');
+		return $this->hasMany(\lazyworker\ItemQuantityGroup::class, 'parent_id');
 	}
 
 	public function item_quantity_maps()
 	{
-		return $this->hasMany(\lazyworker\Models\ItemQuantityMap::class, 'item_id');
+		return $this->hasMany(\lazyworker\ItemQuantityMap::class, 'item_id');
 	}
 
 	public function purchase_order_product_items()
 	{
-		return $this->hasMany(\lazyworker\Models\PurchaseOrderProductItem::class);
+		return $this->hasMany(\lazyworker\PurchaseOrderProductItem::class);
 	}
 
 	public function purchase_order_return_application_product_items()
 	{
-		return $this->hasMany(\lazyworker\Models\PurchaseOrderReturnApplicationProductItem::class);
+		return $this->hasMany(\lazyworker\PurchaseOrderReturnApplicationProductItem::class);
 	}
 }

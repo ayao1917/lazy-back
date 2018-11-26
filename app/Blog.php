@@ -5,26 +5,29 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class ProductContentImage
+ * Class Blog
  * 
  * @property int $id
  * @property int $product_id
- * @property string $photo
+ * @property string $title
+ * @property string $content
+ * @property string $author
+ * @property \Carbon\Carbon $publish_date
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\Product $product
+ * @property \Illuminate\Database\Eloquent\Collection $blog_content_images
  *
  * @package App\Models
  */
-class ProductContentImage extends Eloquent
+class Blog extends Eloquent
 {
-	protected $table = 'product_content_image';
+	protected $table = 'blog';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
@@ -35,19 +38,23 @@ class ProductContentImage extends Eloquent
 	];
 
 	protected $dates = [
+		'publish_date',
 		'created',
 		'modified'
 	];
 
 	protected $fillable = [
 		'product_id',
-		'photo',
+		'title',
+		'content',
+		'author',
+		'publish_date',
 		'created',
 		'modified'
 	];
 
-	public function product()
+	public function blog_content_images()
 	{
-		return $this->belongsTo(\App\Models\Product::class);
+		return $this->hasMany(\lazyworker\BlogContentImage::class);
 	}
 }

@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -33,8 +33,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $pageAlias
  * @property string $tag
  * 
- * @property \App\Models\ProductSubcategory $product_subcategory
- * @property \App\Models\Discount $discount
+ * @property \lazyworker\ProductSubcategory $product_subcategory
+ * @property \lazyworker\Discount $discount
  * @property \Illuminate\Database\Eloquent\Collection $product_addons
  * @property \Illuminate\Database\Eloquent\Collection $product_attacheds
  * @property \Illuminate\Database\Eloquent\Collection $product_content_images
@@ -95,48 +95,48 @@ class Product extends Eloquent
 
 	public function product_subcategory()
 	{
-		return $this->belongsTo(\lazyworker\Models\ProductSubcategory::class);
+		return $this->belongsTo(\lazyworker\ProductSubcategory::class);
 	}
 
 	public function discount()
 	{
-		return $this->belongsTo(\lazyworker\Models\Discount::class);
+		return $this->belongsTo(\lazyworker\Discount::class);
 	}
 
 	public function product_addons()
 	{
-		return $this->hasMany(\lazyworker\Models\ProductAddon::class, 'addon_product_id');
+		return $this->hasMany(\lazyworker\ProductAddon::class, 'addon_product_id');
 	}
 
 	public function product_attacheds()
 	{
-		return $this->hasMany(\lazyworker\Models\ProductAttached::class);
+		return $this->hasMany(\lazyworker\ProductAttached::class);
 	}
 
 	public function product_content_images()
 	{
-		return $this->hasMany(\lazyworker\Models\ProductContentImage::class);
+		return $this->hasMany(\lazyworker\ProductContentImage::class);
 	}
 
 	public function product_programs()
 	{
-		return $this->hasMany(\lazyworker\Models\ProductProgram::class);
+		return $this->hasMany(\lazyworker\ProductProgram::class);
 	}
 
 	public function product_relates()
 	{
-		return $this->hasMany(\lazyworker\Models\ProductRelate::class, 'relate_product_id');
+		return $this->hasMany(\lazyworker\ProductRelate::class, 'relate_product_id');
 	}
 
 	public function purchase_orders()
 	{
-		return $this->belongsToMany(\lazyworker\Models\PurchaseOrder::class, 'purchase_order_product')
+		return $this->belongsToMany(\lazyworker\PurchaseOrder::class, 'purchase_order_product')
 					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
 	}
 
 	public function purchase_order_return_applications()
 	{
-		return $this->belongsToMany(\lazyworker\Models\PurchaseOrderReturnApplication::class, 'purchase_order_return_application_product')
+		return $this->belongsToMany(\lazyworker\PurchaseOrderReturnApplication::class, 'purchase_order_return_application_product')
 					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
 	}
 }

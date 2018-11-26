@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -20,8 +20,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\PurchaseOrderReturnApplicationProduct $purchase_order_return_application_product
- * @property \App\Models\ProductItem $product_item
+ * @property \lazyworker\PurchaseOrderReturnApplicationProduct $purchase_order_return_application_product
+ * @property \lazyworker\ProductItem $product_item
  *
  * @package App\Models
  */
@@ -55,11 +55,11 @@ class PurchaseOrderReturnApplicationProductItem extends Eloquent
 
 	public function purchase_order_return_application_product()
 	{
-		return $this->belongsTo(\App\Models\PurchaseOrderReturnApplicationProduct::class);
+		return $this->belongsTo(\lazyworker\PurchaseOrderReturnApplicationProduct::class);
 	}
 
 	public function product_item()
 	{
-		return $this->belongsTo(\App\Models\ProductItem::class);
+		return $this->belongsTo(\lazyworker\ProductItem::class);
 	}
 }

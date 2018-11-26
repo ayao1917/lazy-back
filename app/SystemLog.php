@@ -5,37 +5,40 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class PurchaseOrderExtraFee
+ * Class SystemLog
  * 
  * @property int $id
- * @property int $order_id
+ * @property int $admin_id
+ * @property string $table_class
+ * @property int $foreign_id
  * @property int $type
- * @property string $name
- * @property int $fee
+ * @property string $message
+ * @property bool $is_resolved
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\PurchaseOrder $purchase_order
+ * @property \lazyworker\Admin $admin
  *
  * @package App\Models
  */
-class PurchaseOrderExtraFee extends Eloquent
+class SystemLog extends Eloquent
 {
-	protected $table = 'purchase_order_extra_fee';
+	protected $table = 'system_log';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'order_id' => 'int',
+		'admin_id' => 'int',
+		'foreign_id' => 'int',
 		'type' => 'int',
-		'fee' => 'int'
+		'is_resolved' => 'bool'
 	];
 
 	protected $dates = [
@@ -44,16 +47,18 @@ class PurchaseOrderExtraFee extends Eloquent
 	];
 
 	protected $fillable = [
-		'order_id',
+		'admin_id',
+		'table_class',
+		'foreign_id',
 		'type',
-		'name',
-		'fee',
+		'message',
+		'is_resolved',
 		'created',
 		'modified'
 	];
 
-	public function purchase_order()
+	public function admin()
 	{
-		return $this->belongsTo(\App\Models\PurchaseOrder::class, 'order_id');
+		return $this->belongsTo(\lazyworker\Admin::class);
 	}
 }

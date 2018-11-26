@@ -5,32 +5,37 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class SystemMessage
+ * Class PurchaseOrderExtraFee
  * 
  * @property int $id
+ * @property int $order_id
  * @property int $type
- * @property string $title
- * @property string $content
+ * @property string $name
+ * @property int $fee
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
+ * 
+ * @property \lazyworker\PurchaseOrder $purchase_order
  *
  * @package App\Models
  */
-class SystemMessage extends Eloquent
+class PurchaseOrderExtraFee extends Eloquent
 {
-	protected $table = 'system_message';
+	protected $table = 'purchase_order_extra_fee';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'type' => 'int'
+		'order_id' => 'int',
+		'type' => 'int',
+		'fee' => 'int'
 	];
 
 	protected $dates = [
@@ -39,10 +44,16 @@ class SystemMessage extends Eloquent
 	];
 
 	protected $fillable = [
+		'order_id',
 		'type',
-		'title',
-		'content',
+		'name',
+		'fee',
 		'created',
 		'modified'
 	];
+
+	public function purchase_order()
+	{
+		return $this->belongsTo(\lazyworker\PurchaseOrder::class, 'order_id');
+	}
 }

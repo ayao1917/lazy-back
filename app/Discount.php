@@ -5,39 +5,34 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class ProductProgram
+ * Class Discount
  * 
  * @property int $id
- * @property int $product_id
  * @property string $name
- * @property int $quantity
- * @property int $price
- * @property bool $is_free_shipping
+ * @property string $photo
+ * @property bool $is_published
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\Product $product
+ * @property \Illuminate\Database\Eloquent\Collection $products
  *
  * @package App\Models
  */
-class ProductProgram extends Eloquent
+class Discount extends Eloquent
 {
-	protected $table = 'product_program';
+	protected $table = 'discount';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'product_id' => 'int',
-		'quantity' => 'int',
-		'price' => 'int',
-		'is_free_shipping' => 'bool'
+		'is_published' => 'bool'
 	];
 
 	protected $dates = [
@@ -46,17 +41,15 @@ class ProductProgram extends Eloquent
 	];
 
 	protected $fillable = [
-		'product_id',
 		'name',
-		'quantity',
-		'price',
-		'is_free_shipping',
+		'photo',
+		'is_published',
 		'created',
 		'modified'
 	];
 
-	public function product()
+	public function products()
 	{
-		return $this->belongsTo(\App\Models\Product::class);
+		return $this->hasMany(\lazyworker\Product::class);
 	}
 }

@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\Home;
+use lazyworker\Home;
 
 class HomeController extends Controller
 {

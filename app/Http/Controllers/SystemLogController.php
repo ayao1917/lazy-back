@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\SystemLog;
+use lazyworker\SystemLog;
 
 class SystemLogController extends Controller
 {

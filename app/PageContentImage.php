@@ -5,38 +5,33 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class SeoInfo
+ * Class PageContentImage
  * 
  * @property int $id
- * @property int $relate_id
- * @property int $type
- * @property string $path
- * @property string $title
- * @property string $description
- * @property string $keywords
- * @property string $heading_tag
- * @property string $sub_heading_tag
+ * @property int $page_id
+ * @property string $photo
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
+ * 
+ * @property \lazyworker\Page $page
  *
  * @package App\Models
  */
-class SeoInfo extends Eloquent
+class PageContentImage extends Eloquent
 {
-	protected $table = 'seo_info';
+	protected $table = 'page_content_image';
     public $timestamps = true;
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
 
 	protected $casts = [
-		'relate_id' => 'int',
-		'type' => 'int'
+		'page_id' => 'int'
 	];
 
 	protected $dates = [
@@ -45,15 +40,14 @@ class SeoInfo extends Eloquent
 	];
 
 	protected $fillable = [
-		'relate_id',
-		'type',
-		'path',
-		'title',
-		'description',
-		'keywords',
-		'heading_tag',
-		'sub_heading_tag',
+		'page_id',
+		'photo',
 		'created',
 		'modified'
 	];
+
+	public function page()
+	{
+		return $this->belongsTo(\lazyworker\Page::class);
+	}
 }

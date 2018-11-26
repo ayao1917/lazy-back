@@ -2,7 +2,7 @@
 
 namespace lazyworker\Repositories;
 
-use lazyworker\Models\PurchaseOrder;
+use lazyworker\PurchaseOrder;
 
 class PurchaseOrderRepository
 {

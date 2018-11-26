@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\ProductCategory $product_category
+ * @property \lazyworker\ProductCategory $product_category
  * @property \Illuminate\Database\Eloquent\Collection $products
  *
  * @package App\Models
@@ -49,11 +49,11 @@ class ProductSubcategory extends Eloquent
 
 	public function product_category()
 	{
-		return $this->belongsTo(\App\Models\ProductCategory::class);
+		return $this->belongsTo(\lazyworker\ProductCategory::class);
 	}
 
 	public function products()
 	{
-		return $this->hasMany(\App\Models\Product::class);
+		return $this->hasMany(\lazyworker\Product::class);
 	}
 }

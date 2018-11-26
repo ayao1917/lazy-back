@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -41,8 +41,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created
  * @property \Carbon\Carbon $modified
  * 
- * @property \App\Models\PurchaseOrder $purchase_order
- * @property \App\Models\User $user
+ * @property \lazyworker\PurchaseOrder $purchase_order
+ * @property \lazyworker\User $user
  * @property \Illuminate\Database\Eloquent\Collection $products
  *
  * @package App\Models
@@ -104,17 +104,17 @@ class PurchaseOrderReturnApplication extends Eloquent
 
 	public function purchase_order()
 	{
-		return $this->belongsTo(\App\Models\PurchaseOrder::class, 'purchase_order_replacement_id');
+		return $this->belongsTo(\lazyworker\PurchaseOrder::class, 'purchase_order_replacement_id');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class);
+		return $this->belongsTo(\lazyworker\User::class);
 	}
 
 	public function products()
 	{
-		return $this->belongsToMany(\App\Models\Product::class, 'purchase_order_return_application_product')
+		return $this->belongsToMany(\lazyworker\Product::class, 'purchase_order_return_application_product')
 					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
 	}
 }

@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\Product;
+use lazyworker\Product;
 use lazyworker\Repositories\ProductRepository;
 
 class ProductController extends BaseController

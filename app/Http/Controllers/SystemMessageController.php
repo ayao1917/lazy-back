@@ -3,7 +3,7 @@
 namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
-use lazyworker\Models\SystemMessage;
+use lazyworker\SystemMessage;
 
 class SystemMessageController extends Controller
 {
