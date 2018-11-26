@@ -4,9 +4,23 @@ namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
 use lazyworker\Models\ProductItem;
+use lazyworker\Repositories\ProductItemRepository;
 
 class ProductItemController extends BaseController
 {
+    /** @var  ProductItemRepository inject ProductItemRepository */
+    protected $productItemRepository;
+
+    /**
+     * UserController constructor.
+     *
+     * @param ProductItemRepository $productItemRepository
+     */
+    public function __construct(ProductItemRepository $productItemRepository)
+    {
+        $this->productItemRepository = $productItemRepository;
+    }
+
     public function index()
     {
         if (!isset($_GET['productId'])) {
@@ -14,7 +28,7 @@ class ProductItemController extends BaseController
         }
 
         $productId = $_GET['productId'];
-        $items = ProductItem::where('product_id', $productId)->get();
+        $items = $this->productItemRepository->getByProductId($productId);
 
         return $this->sendResponse($items);
     }

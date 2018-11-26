@@ -4,9 +4,23 @@ namespace lazyworker\Http\Controllers;
 
 use Illuminate\Http\Request;
 use lazyworker\Models\Product;
+use lazyworker\Repositories\ProductRepository;
 
 class ProductController extends BaseController
 {
+    /** @var  ProductRepository inject ProductRepository */
+    protected $productRepository;
+
+    /**
+     * UserController constructor.
+     *
+     * @param ProductRepository $productRepository
+     */
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * List product
      *
@@ -20,9 +34,7 @@ class ProductController extends BaseController
         }
 
         $categoryId = $_GET['categoryId'];
-        $products = Product::whereHas('product_subcategory', function ($q) use ($categoryId) {
-            $q->where('product_category_id', $categoryId);
-        })->get();
+        $products = $this->productRepository->getByCategoryId($categoryId);
 
         return $this->sendResponse($products);
     }
