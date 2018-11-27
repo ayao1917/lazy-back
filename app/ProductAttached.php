@@ -68,4 +68,9 @@ class ProductAttached extends Eloquent
 	{
 		return $this->belongsTo(\lazyworker\Product::class);
 	}
+
+	public function product_items()
+    {
+        return $this->hasMany(\lazyworker\ProductItem::class, 'attached_id');
+    }
 }

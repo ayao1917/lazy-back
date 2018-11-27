@@ -5,7 +5,7 @@
  * Date: Thu, 01 Nov 2018 09:47:17 +0000.
  */
 
-namespace lazyworker\Models;
+namespace lazyworker;
 
 use Reliese\Database\Eloquent\Model as Eloquent;
 
@@ -45,7 +45,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $shop_rid
  * @property string $shop_click_id
  * 
- * @property \App\Models\User $user
+ * @property \lazyworker\User $user
  * @property \Illuminate\Database\Eloquent\Collection $purchase_order_extra_fees
  * @property \Illuminate\Database\Eloquent\Collection $products
  * @property \Illuminate\Database\Eloquent\Collection $purchase_order_return_applications
@@ -115,22 +115,26 @@ class PurchaseOrder extends Eloquent
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class);
+		return $this->belongsTo(\lazyworker\User::class);
 	}
 
 	public function purchase_order_extra_fees()
 	{
-		return $this->hasMany(\App\Models\PurchaseOrderExtraFee::class, 'order_id');
+		return $this->hasMany(\lazyworker\PurchaseOrderExtraFee::class, 'order_id');
 	}
 
-	public function products()
+	public function purchase_order_products()
 	{
-		return $this->belongsToMany(\App\Models\Product::class, 'purchase_order_product')
-					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
+		return $this->hasMany(\lazyworker\PurchaseOrderProduct::class, 'purchase_order_id');
 	}
 
 	public function purchase_order_return_applications()
 	{
-		return $this->hasMany(\App\Models\PurchaseOrderReturnApplication::class, 'purchase_order_replacement_id');
+		return $this->hasMany(\lazyworker\PurchaseOrderReturnApplication::class, 'purchase_order_replacement_id');
 	}
+
+	public function replacement_purchase_orders()
+    {
+        return $this->hasMany(\lazyworker\PurchaseOrder::class, 'purchase_order_id');
+    }
 }

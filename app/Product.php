@@ -105,12 +105,12 @@ class Product extends Eloquent
 
 	public function product_addons()
 	{
-		return $this->hasMany(\lazyworker\ProductAddon::class, 'addon_product_id');
+		return $this->belongsToMany(\lazyworker\Product::class, 'product_addon');
 	}
 
-	public function product_attacheds()
+	public function product_attached()
 	{
-		return $this->hasMany(\lazyworker\ProductAttached::class);
+		return $this->hasOne(\lazyworker\ProductAttached::class);
 	}
 
 	public function product_content_images()
@@ -125,18 +125,11 @@ class Product extends Eloquent
 
 	public function product_relates()
 	{
-		return $this->hasMany(\lazyworker\ProductRelate::class, 'relate_product_id');
+		return $this->belongsToMany(\lazyworker\Product::class, 'product_relate');
 	}
 
-	public function purchase_orders()
-	{
-		return $this->belongsToMany(\lazyworker\PurchaseOrder::class, 'purchase_order_product')
-					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
-	}
-
-	public function purchase_order_return_applications()
-	{
-		return $this->belongsToMany(\lazyworker\PurchaseOrderReturnApplication::class, 'purchase_order_return_application_product')
-					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
-	}
+	public function product_items()
+    {
+	    return $this->hasMany(\lazyworker\ProductItem::class, 'product_id');
+    }
 }

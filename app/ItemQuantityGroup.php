@@ -50,7 +50,7 @@ class ItemQuantityGroup extends Eloquent
 
 	public function product_item()
 	{
-		return $this->belongsTo(\lazyworker\ProductItem::class, 'parent_id');
+		return $this->belongsToMany(\lazyworker\ProductItem::class, 'item_quantity_map');
 	}
 
 	public function item_quantity_maps()

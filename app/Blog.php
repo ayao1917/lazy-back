@@ -57,4 +57,9 @@ class Blog extends Eloquent
 	{
 		return $this->hasMany(\lazyworker\BlogContentImage::class);
 	}
+
+	public function product()
+    {
+        return $this->belongsTo(\lazyworker\Product::class);
+    }
 }

@@ -112,9 +112,13 @@ class PurchaseOrderReturnApplication extends Eloquent
 		return $this->belongsTo(\lazyworker\User::class);
 	}
 
-	public function products()
+	public function purchase_order_replacement()
+    {
+        return $this->belongsTo(\lazyworker\PurchaseOrder::class, 'purchase_order_replacement_id');
+    }
+
+	public function purchase_order_return_application_products()
 	{
-		return $this->belongsToMany(\lazyworker\Product::class, 'purchase_order_return_application_product')
-					->withPivot('id', 'product_name', 'price', 'special_price', 'fee', 'created', 'modified');
+		return $this->hasMany(\lazyworker\PurchaseOrderReturnApplicationProduct::class, 'purchase_order_return_application_id');
 	}
 }
