@@ -118,7 +118,7 @@ class Product extends Eloquent
 		return $this->hasMany(\lazyworker\ProductContentImage::class);
 	}
 
-	public function product_programs()
+	public function productPrograms()
 	{
 		return $this->hasMany(\lazyworker\ProductProgram::class);
 	}

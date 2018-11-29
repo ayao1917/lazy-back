@@ -43,6 +43,9 @@ Route::prefix('v1')->group(function () {
         Route::put('upload/{type}', 'UploadFileController@imageUpload');
     });
 
+    // Order export
+    Route::get('export/order', 'PurchaseOrderController@export');
+
     // Blog
     Route::get('blogs', 'BlogController@index');
     Route::get('blogs/{blog}', 'BlogController@show');

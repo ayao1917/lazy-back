@@ -54,6 +54,55 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class PurchaseOrder extends Eloquent
 {
+    const STATUS = [
+        100 => '新訂單', 101 => '訂單確認中', 102 => '待出貨', 103 => '已出貨', 104 => '已到貨', 105 => '已開立發票', 198 => '開立異常', 199 => '上傳失敗',
+        200 => '退貨確認中', 201 => '退貨確認', 202 => '退貨中', 203 => '已退貨', 204 => '拒收', 205 => '退款中', 206 => '已退款', 299 => '上傳失敗',
+        300 => '換貨確認中', 301 => '換貨確認', 302 => '換貨中', 303 => '已換貨', 399 => '上傳失敗',
+        400 => '已取消', 401 => '延遲出貨', 402 => '取消確認中',
+        500 => '交易完成',
+        600 => '換貨單',
+    ];
+
+    const PAY_STATUS = [
+        0 => '未付款', 1 => '付款確認中', 2 => '已付款'
+    ];
+
+    const PAY_METHOD = [
+        0 => '貨到付款', 1 => '信用卡付款'
+    ];
+
+    const INVOICE_ERROR_MESSAGE = [
+        'M0' => 'XML 格式錯誤',
+        'M1' => 'XML 格式錯誤',
+        'D0' => '沒有產品明細',
+        'A1' => '上傳失敗',
+        'A2' => '所有折讓金額加總不能大於原發票金額',
+        'A3' => '發票號碼不存在',
+        'A4' => '發票號碼已經被作廢',
+        'A5' => '折讓單已上傳',
+        'A6' => '折讓總金額須大於零',
+        'S1' => '資料庫發生錯誤',
+        'S2' => '訂單日期超過開立日期',
+        'S3' => '未在申報範圍內',
+        'S4' => '未取得發票號碼',
+        'S5' => '發票號碼已使用完畢',
+        'S6' => '超過租賃張數限制',
+        'S7' => '訂單號碼已存在',
+        'S8' => '開立的總金額為負值',
+        'C1' => '資料庫發生錯誤',
+        'C2' => '資料有誤',
+        'C3' => '該發票已過申報期間，需填入核准作廢文號',
+        'C4' => '無此發票號碼可以作廢',
+        'C5' => '該發票已經作廢過',
+        'C6' => '該發票已經折讓，無法作廢',
+        'TaxType9' => '混合課稅別別限收銀機發票',
+        'Invalid' => '無效IP，請通知系統商',
+    ];
+
+    const INVOICE_STATUS = [
+        100 => '未開立', 105 => '已開立發票', 106 => '已作廢', 107 => '已折讓', 198 => '開立異常'
+    ];
+
 	protected $table = 'purchase_order';
     public $timestamps = true;
 
@@ -123,9 +172,9 @@ class PurchaseOrder extends Eloquent
 		return $this->hasMany(\lazyworker\PurchaseOrderExtraFee::class, 'order_id');
 	}
 
-	public function purchase_order_products()
+	public function purchaseOrderProducts()
 	{
-		return $this->hasMany(\lazyworker\PurchaseOrderProduct::class, 'purchase_order_id');
+		return $this->hasMany(\lazyworker\PurchaseOrderProduct::class, 'purchase_order_id', 'id');
 	}
 
 	public function purchase_order_return_applications()
@@ -136,5 +185,31 @@ class PurchaseOrder extends Eloquent
 	public function replacement_purchase_orders()
     {
         return $this->hasMany(\lazyworker\PurchaseOrder::class, 'purchase_order_id');
+    }
+
+    public function getPayStatusNameAttribute()
+    {
+	    return isset(self::PAY_STATUS[$this->pay_status]) ? self::PAY_STATUS[$this->pay_status] : $this->pay_status;
+    }
+
+    public function getStatusNameAttribute()
+    {
+        return isset(self::STATUS[$this->status]) ? self::STATUS[$this->status] : $this->status;
+    }
+
+    public function getPayMethodNameAttribute()
+    {
+        return isset(self::PAY_METHOD[$this->pay_method]) ? self::PAY_METHOD[$this->pay_method] : $this->pay_method;
+    }
+
+    public function getFullAddressAttribute()
+    {
+	    return (isset($this->recipient_city) ? $this->recipient_city : '') .
+            (isset($this->recipient_region) ? $this->recipient_region : '') .
+            (isset($this->recipient_address) ? $this->recipient_address : '');
+    }
+
+    public function getFromDateAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
     }
 }

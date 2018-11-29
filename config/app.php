@@ -213,6 +213,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Custom
+        'AppHelper' => lazyworker\Helpers\AppHelper::class,
+        'FeeHelper' => lazyworker\Helpers\FeeHelper::class,
     ],
 
 ];

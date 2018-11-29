@@ -62,7 +62,7 @@ class PurchaseOrderProduct extends Eloquent
 
 	public function purchase_order()
 	{
-		return $this->belongsTo(\lazyworker\PurchaseOrder::class);
+		return $this->belongsTo(\lazyworker\PurchaseOrder::class, 'id', 'purchase_order_id');
 	}
 
 	public function product()
@@ -70,8 +70,8 @@ class PurchaseOrderProduct extends Eloquent
 		return $this->belongsTo(\lazyworker\Product::class);
 	}
 
-	public function purchase_order_product_items()
+	public function purchaseOrderProductItems()
 	{
-		return $this->hasMany(\lazyworker\PurchaseOrderProductItem::class);
+		return $this->hasMany(\lazyworker\PurchaseOrderProductItem::class, 'purchase_order_product_id', 'id');
 	}
 }

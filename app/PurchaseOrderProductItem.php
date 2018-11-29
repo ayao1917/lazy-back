@@ -58,7 +58,7 @@ class PurchaseOrderProductItem extends Eloquent
 		return $this->belongsTo(\lazyworker\PurchaseOrderProduct::class);
 	}
 
-	public function product_item()
+	public function productItem()
 	{
 		return $this->belongsTo(\lazyworker\ProductItem::class);
 	}
